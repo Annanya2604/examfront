@@ -1,0 +1,111 @@
+<!-- <mat-card>
+    <div mat-subheader>Standard</div>
+    <div class="container">
+        <button routerLink="/admin/add-standard" mat-raised-button color="primary">Add new Standard</button>
+        <button routerLink="/admin/updatestd/:standardId"  mat-raised-button color="primary">Update</button>
+    </div>
+  <mat-list-item *ngFor="let s of standards">
+    <mat-icon matListItemIcon>folder</mat-icon>
+    <mat-divider></mat-divider>
+    <div matListItemTitle>{{s.standardName}}</div>
+    <div matListItemLine>{{s.description}}</div> -->
+    <!-- <div matListItemLine>
+        <button routerLink="/admin/updatestd/:standardId"  mat-raised-button color="primary">Update</button>
+      </div> -->
+  <!-- </mat-list-item>
+  <div >
+    <button routerLink="/admin/updatestd/:standardId"  mat-raised-button color="primary">Update</button>
+  </div>
+
+</mat-card> -->
+<!-- <div class="container">
+    <div class="row">
+        <div class="search-hero">
+        <b>Search : </b>    <input type="text" name="search" [(ngModel)]="searchText" placeholder="search by section">
+        </div>
+    </div>
+</div> -->
+<!--<button routerLink="/admin/add-standard" mat-raised-button color="primary">Add new Standard</button>
+<mat-card class="mt10" *ngFor="let s of standards">
+    <mat-card-header>
+        <mat-card-title>
+            {{s.standardName}}
+        </mat-card-title>
+        <mat-card-subtitle>
+            {{s.description}}
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions>
+        <button  mat-raised-button color="primary" (click)="update(s.standardId)">Update</button>
+    </mat-card-actions>
+    <mat-card-actions>
+        <button mat-raised-button #dlt color="warn" (click)="deleteStandard(s.standardId)">Delete</button>
+    </mat-card-actions>
+        
+    
+</mat-card>-->
+<!-- <div class="container">
+    <div class="row">
+        <div class="search-hero">
+        <b>Search : </b>    <input type="text" name="search" [(ngModel)]="searchText" placeholder="search by standard">
+        </div>
+    </div>
+</div> -->
+<div class="container">
+    
+    <div class="row">
+        <div class="search-hero">
+        <b>Search : </b>    <input type="text" name="search" [(ngModel)]="searchText" placeholder="search by standard">
+        </div>
+    </div>
+</div>
+<button routerLink="/admin/add-standard"  mat-raised-button color="primary">Add new Standard</button> <br><br>
+
+<table class="styled-table" >
+    <thead>
+        <tr>
+            <th>Standard Name</th>
+            <th> Description</th>
+            <th>Update </th>
+            <th>Delete </th>
+        </tr>
+    </thead>
+    <tbody >
+        <tr *ngFor="let s of standards | filter:searchText |paginate:{itemsPerPage: tableSize, currentPage:page, totalItems:count}; let i = index">
+            <td> {{s.standardName}}  </td>
+            <td>  {{s.description}}  </td>
+            <!-- <td><button (click)="update(s.standardId)" mat-raised-button color="primary" > Update</button></td> -->
+            <td><button mat-icon-button  color="primary" (click)="update(s.standardId)" aria-label="Example icon button with a vertical three dot icon">
+                <mat-icon>edit</mat-icon>
+              </button></td>
+              <td><button mat-icon-button color="warn" (click)="deleteStandard(s.standardId)" aria-label="Example icon button with a vertical three dot icon">
+                <mat-icon>delete</mat-icon>
+              </button></td>
+            <!-- <td><button  mat-raised-button color="warn" (click)="deleteStandard(s.standardId)" >Delete</button></td> -->
+        </tr>
+        <!-- <tr class="active-row">
+            <td>Melissa</td>
+            <td>5150</td>
+        </tr> -->
+        <!-- <tr>
+            <td>Dom</td>
+            <td>6000</td>
+        </tr> -->
+        <!-- and so on... -->
+    </tbody>
+</table>
+<div style="margin-right:150px;text-align: right;">
+    <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)"></pagination-controls>
+</div><br>
+<div style="margin-right:150px;text-align: right;">
+    <label>Page size:</label>
+    <select  (change)="OnTableSizeChange($event)">
+        
+       <option *ngFor="let size of tableSizes">
+       
+            {{size}}
+       </option>
+    </select>
+</div>
+
+  

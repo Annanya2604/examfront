@@ -1,0 +1,49 @@
+<h3><b> View Questions : </b></h3><hr>
+<div class="bootstrap-wrapper">
+    <div class="row">
+        <div class="col-md-12"><!--; let i=index-->
+            <button mat-raised-button color="accent" (click)="addques(qId)">Add Questions</button><br><br>
+            <!-- <button mat-raised-button color="primary" (click)="updateques(qId)">Update Questions</button><hr> -->
+
+            <mat-card *ngFor="let q of questions; let i=index" class="mt20">
+                <mat-card-content >
+                    <b>Q{{i+1}}.</b>
+                    <span class="ml20"><b>{{q.quesName}}</b></span>
+                    <span class="ml50"><b> ( {{q.quesMarks}} Marks) </b></span>
+                    
+                    
+                    <!-- *ngIf="a.question.quesId === q.quesId"  -->
+                    <div class="container-fluid">
+                   <div class="row" >
+                        <div class="col-md-6" *ngFor="let a of q.answer;let i=index">
+                        
+                         <p><b>{{i+1}}. </b> {{a.optionName}}</p> 
+                         <!-- <div *ngIf="a.iscorrect==true">
+                            <p><b>Correct answer</b></p>
+                            <p>{{a.optionName}}</p>
+                        </div> -->
+                         
+                        </div>
+                        <div *ngFor="let a of q.answer">
+                        <div *ngIf="a.isCorrect==true">
+                           
+                            <p class="mt20"><b>Correct Answer:</b> {{a.optionName}}</p>
+                        </div>
+                        
+                    </div>
+                    <button mat-button color="primary" (click)="updateques(qId,q.quesId)" class="button">Update</button>
+                    <button style="margin-left:20px" mat-button color="warn" (click)="deleteQuestions(q.quesId)"  class="button" >Delete</button>
+                    <!-- <span class="material-icons red-color">delete </span> -->
+                    </div>
+                    <mat-divider></mat-divider>
+                    <!--  -->
+                    
+                <!-- </div> -->
+            </div>
+                        
+                     
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

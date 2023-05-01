@@ -1,0 +1,47 @@
+<mat-card>
+    <div><button mat-raised-button color="accent" routerLink="/admin/standard" >Back</button></div>
+    
+    <h1 style="text-align: center; color:#683cb4;"> Add new Standard</h1>
+    <!--{{standard|json}}-->
+    <mat-card-content>
+        <div class="bootstrap-wrapper">
+            <div class="row">
+                <div class="col md 6 offset md-3 text-center">
+                    <form (ngSubmit)="registerForm.form.valid && formSubmit()" novalidate autocomplete="off" #registerForm="ngForm">
+                        
+                        <mat-form-field class="w100" appearance="outline">
+                            <mat-label>Standard Name</mat-label>
+                            <input required type="text"  pattern="[a-zA-Z ]+" name="title" #title="ngModel" matInput  placeholder="enter here" [(ngModel)]="standard.standardName" required>
+                        </mat-form-field>
+                        <div>
+                        <div class="mb10" style="color:red; margin-left: 20px;" *ngIf="title.touched && title.errors?.['pattern']">Numbers not allowed please enter a valid input !!</div>
+                        
+                        <div class="text-danger" *ngIf="(title.touched||registerForm.submitted) && title.errors?.['required']" ></div>
+                    </div>
+                        <mat-form-field class="w100" appearance="outline">
+                            <mat-label>Standard Description</mat-label>
+                            <textarea required type="text" name="std" #std="ngModel" pattern="[a-zA-Z ]+" matInput  placeholder="enter standard description" [(ngModel)]="standard.description" rows="5"></textarea>
+            
+                        </mat-form-field>
+                        <div>
+                        <div class="mb10" style="color:red; margin-left: 20px;" *ngIf="title.touched && title.errors?.['pattern']">Numbers not allowed please enter a valid input !!</div>
+                        <div class="text-danger" *ngIf="(std.touched||registerForm.submitted) && std.errors?.['required']" ></div>
+                    </div>
+                        
+                          <div class="container text-center ">
+                            <button mat-raised-button color="primary">Add</button>
+                          </div><br>
+                          
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--<form action="">
+            <mat-form-field class="w100" appearance="outline">
+                <mat-label>Standard Name</mat-label>
+                <input type="text" name="title" matInput  placeholder="enter here">
+
+            </mat-form-field>
+        </form>-->
+    </mat-card-content>
+</mat-card>

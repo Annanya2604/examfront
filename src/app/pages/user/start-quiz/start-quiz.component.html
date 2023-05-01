@@ -1,0 +1,143 @@
+
+<button mat-raised-button color="accent" (click)="back(qid)" >Back</button>
+<div class="bootstrap-wrapper"  *ngIf="!isSubmit">
+    <div class="row">
+        
+        <div class="col-md-8">
+            <div class="col-md-2">
+                
+                <h3>Instructions</h3>
+           </div>
+           <!-- <div class="col-md-8"> -->
+                
+                <ng-container *ngIf="questions">
+                   <h1> Current Quiz</h1>
+                </ng-container>
+                <mat-card *ngFor="let q of questions;let i=index">
+                     <mat-card-content>
+                       
+                      <p> Q{{i+1}}. <span [innerHTML]="q.quesName"></span></p>
+                       <mat-divider></mat-divider>
+                       <div class="row mt-10">
+                           <div class="col-md-6">
+                              
+                               <input type="radio" [(ngModel)]="q.givenAnswer" class="mr-10" [value]="q.answer[0].optionId" [name]="'option'+i"/>{{q.answer[0].optionName}}
+                           </div>
+                           <div class="col-md-6">
+                               
+                               <input type="radio" [(ngModel)]="q.givenAnswer"  class="mr-10"  [value]="q.answer[1].optionId" [name]="'option'+i"/>{{q.answer[1].optionName}}
+                           </div>
+                       </div>
+                       
+                       <div class="row mt-10">
+                           <div class="col-md-6">
+                               
+                               <input type="radio" [(ngModel)]="q.givenAnswer"  class="mr-10" [value]="q.answer[2].optionId" [name]="'option'+i"/>{{q.answer[2].optionName}}
+                           </div>
+                           <div class="col-md-6">
+                               <input type="radio" [(ngModel)]="q.givenAnswer" class="mr-10" [value]="q.answer[3].optionId" [name]="'option'+i"/>{{q.answer[3].optionName}}
+                           </div>
+                       </div>
+                   </mat-card-content>
+                </mat-card>
+                <div class="container text-center mt-10">
+                   <button mat-raised-button color="accent" (click)="submitQuiz()">Submit Quiz</button>
+                </div>
+           <!-- </div> -->
+           
+        </div>
+        <div class="col-md-2">
+            <mat-card class="mt-10">
+                <mat-card-header>
+                    <mat-card-title> Progress </mat-card-title>
+                    <mat-card-subtitle>Quiz will be automatically submitted after the time gets over</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <h1>{{getFormattedTime()}}</h1>
+                    <mat-spinner mode="determinate" [value]="(timer/(this.questions.length*2*60))*100"></mat-spinner>
+                </mat-card-content>
+            </mat-card>
+            <!-- <mat-spinner></mat-spinner> -->
+        </div>
+        <div class="container-fluid">
+            <!-- <div class="col-md-2">
+                
+                 <h3>Instructions</h3>
+            </div>
+            <div class="col-md-8">
+                 
+                 <ng-container *ngIf="questions">
+                    <h1> Current Quiz</h1>
+                 </ng-container>
+                 <mat-card *ngFor="let q of questions;let i=index">
+                      <mat-card-content>
+                        
+                       <p> Q{{i+1}}. <span [innerHTML]="q.quesName"></span></p>
+                        <mat-divider></mat-divider>
+                        <div class="row mt-10">
+                            <div class="col-md-6">
+                               
+                                <input type="radio" [(ngModel)]="q.givenAnswer" class="mr-10" [value]="q.answer[0].optionId" [name]="'option'+i"/>{{q.answer[0].optionName}}
+                            </div>
+                            <div class="col-md-6">
+                                
+                                <input type="radio" [(ngModel)]="q.givenAnswer"  class="mr-10"  [value]="q.answer[1].optionId" [name]="'option'+i"/>{{q.answer[1].optionName}}
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-10">
+                            <div class="col-md-6">
+                                
+                                <input type="radio" [(ngModel)]="q.givenAnswer"  class="mr-10" [value]="q.answer[2].optionId" [name]="'option'+i"/>{{q.answer[2].optionName}}
+                            </div>
+                            <div class="col-md-6">
+                                <input type="radio" [(ngModel)]="q.givenAnswer" class="mr-10" [value]="q.answer[3].optionId" [name]="'option'+i"/>{{q.answer[3].optionName}}
+                            </div>
+                        </div>
+                    </mat-card-content>
+                 </mat-card>
+                 <div class="container text-center mt-10">
+                    <button mat-raised-button color="accent" (click)="submitQuiz()">Submit Quiz</button>
+                 </div>
+            </div>
+             -->
+        </div>
+
+        <!-- <div class="col-md-2">
+           
+            <mat-spinner></mat-spinner>
+    
+        </div> -->
+    
+    </div>
+    
+    </div>
+
+    <!--show the result-->
+    <div class="bootstrap-wrapper" *ngIf="isSubmit">
+        <!-- <div class="container text-center">
+            <img src="../../../../assets/result.png" class="profile-image"/> 
+        </div> -->
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+            <!-- <mat-card> -->
+                <div class="container text-center">
+                    <img src="../../../../assets/result.png" class="profile-image"/> 
+                </div><br>
+                <!-- <mat-card-header>
+                    <mat-card-title>
+                         Result
+                    </mat-card-title>
+                </mat-card-header> -->
+                <!-- <mat-card-content> -->
+                    <div style="text-align: center;">
+                    <h1>Marks obtained: {{studquiz.marksObtained}} </h1>
+                    <h1>Correct Answers: {{studquiz.correctAnswer}}</h1>
+                    <h1>Attempted ques : {{studquiz.attemptedques}}</h1>
+                    <h1>Result : {{studquiz.resultStatus}}</h1>
+                </div>
+                <!-- </mat-card-content> -->
+            <!-- </mat-card>     -->
+            </div>
+        </div>
+    </div>

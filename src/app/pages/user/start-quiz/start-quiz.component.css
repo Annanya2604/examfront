@@ -1,0 +1,15 @@
+.mt-10{
+    margin-top: 20px;
+}
+.mr-10{
+    margin-right: 10px;
+}
+.text-center{
+    text-align: center;
+}
+.profile-image{
+    max-width: 60px;
+    max-height: 60px;
+    /* border:2px solid ; */
+    border-radius: 20%;
+}

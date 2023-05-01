@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu_book</mat-icon>
+    </button>
+    <span>Online Exam Portal</span>
+    <span class="example-spacer"></span>
+    <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      
+        Login
+      </button> -->
+      <!-- <button mat-button color="accent">Login</button> -->
+      <!-- <a *ngIf="!login.isLoggedIn()" routerLink="/login" mat-button style="color: white;">Login</a> -->
+      <a *ngIf="login.isLoggedIn()" (click)="logout()" mat-button style="color: white;">Logout</a>
+    
+  </mat-toolbar>
+  

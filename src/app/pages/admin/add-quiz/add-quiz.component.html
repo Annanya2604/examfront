@@ -1,0 +1,124 @@
+<mat-card>
+    <div>
+        <button mat-raised-button color="accent" routerLink="/admin/viewquiz">Back</button>
+    </div>
+    <h1 style="text-align:center;color:#683cb4">Add new Quiz</h1>
+    
+    <div class="col-md-8 offset-md-1">
+        <form (ngSubmit)="quizform.form.valid && addquiz()"  novalidate autocomplete="off" #quizform="ngForm">
+            <mat-form-field class="w100" appearance="fill">
+                <mat-label>Enter Quiz Name</mat-label>
+                <input required type="text" name="quizname" #quizname="ngModel"  placeholder="enter here" [(ngModel)]="quiz.quizName" matInput/>
+            </mat-form-field>
+            <div>
+                
+                <div class="text-danger" *ngIf="(quizname.touched||quizform.submitted) && quizname.errors?.['required']" ></div>
+            </div>
+            <mat-form-field class="w100" appearance="fill">
+                <mat-label>Enter Description</mat-label>
+                <textarea required  type="text" name="quizdescription" #quizdescription="ngModel" placeholder="enter here" [(ngModel)]="quiz.description" matInput></textarea>
+            </mat-form-field>
+            <div>
+                <div class="text-danger" *ngIf="(quizdescription.touched||quizform.submitted) && quizdescription.errors?.['required']" ></div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-form-field class="w100" appearance="fill">
+                        <mat-label>Enter Quiz Marks</mat-label>
+                        <input required  pattern="[0-9]+"type="text" name="maxMarks" #maxMarks="ngModel" placeholder="enter here"  [(ngModel)]="quiz.quizMarks" matInput/>
+                    </mat-form-field>
+                    <div>
+                        <div class="mb10" style="color:red; margin-left: 20px;" *ngIf="maxMarks.touched && maxMarks.errors?.['pattern']">Only numbers are allowed !!</div>
+                        <div class="text-danger" *ngIf="(maxMarks.touched||quizform.submitted) && maxMarks.errors?.['required']" ></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field class="w100" appearance="fill">
+                        <mat-label>No of questions</mat-label>
+                        <input required pattern="[0-9]+" type="text" name="noOfQuestions" #noOfQuestions="ngModel" placeholder="enter here" [(ngModel)]="quiz.noOfQues" matInput/>
+                    </mat-form-field>
+                    <div>
+                        <div class="mb10" style="color:red; margin-left: 20px;" *ngIf="noOfQuestions.touched && noOfQuestions.errors?.['pattern']">Only numbers are allowed !!</div>
+                        <div class="text-danger" *ngIf="(noOfQuestions.touched||quizform.submitted) && noOfQuestions.errors?.['required']" ></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- <mat-form-field>
+                        <input matInput [matDatepicker]="datepicker" type="datetime-local"  placeholder="Created date">
+                        <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #datepicker></mat-datepicker>
+                    </mat-form-field> -->
+                    <!-- <mat-form-field>
+                        <input matInput type="datetime-local" placeholder="start date">
+                      </mat-form-field> -->
+                        <label>Quiz Date: </label>
+                        <input  type="datetime-local" placeholder="start date" name="startdate" [(ngModel)]="quiz.createdDate">
+                      
+                </div><br>
+              
+            </div><br>
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- <mat-form-field class="w100" appearance="fill">
+                        <mat-label>End time</mat-label>
+                        <input type="text" name="endTime" placeholder="enter here" matInput/>
+                    </mat-form-field> -->
+                    <label>Start time:</label>
+                    <input  type="datetime-local" placeholder="start time"  name="startTime" [(ngModel)]="quiz.startTime">
+                </div>
+                <div class="col-md-6">
+                    <!-- <mat-form-field class="w100" appearance="fill">
+                        <mat-label>Start time</mat-label>
+                        <input type="text" name="startTime" placeholder="enter here" matInput/>
+                    </mat-form-field> -->
+                    <label>End Time:</label>
+                    <input  type="datetime-local" placeholder="end time"  name="endTime" [(ngModel)]="quiz.endTime">
+                    
+                </div>
+            </div><br>
+            <mat-form-field appearance="fill" class="mt20 w100">
+                <mat-label>Standard</mat-label>
+                <mat-select  required [(ngModel)]="standard.standardId" name="standardName" #standardName="ngModel" (selectionChange)="onStandardChange()">
+                  
+                  <mat-option *ngFor="let s of standards" [value]="s.standardId" > {{ s.standardName}}</mat-option>
+                </mat-select> <!--s.standardId-->
+              </mat-form-field>
+              <div>
+                <div class="text-danger" *ngIf="(standardName.touched||quizform.submitted) && standardName.errors?.['required']" ></div>
+              </div>
+            <mat-form-field appearance="fill" class="mt20 w100">
+                <mat-label>Subject</mat-label><!--subjects.subjectId-->
+                <mat-select required [(ngModel)]="quiz.subject" name="subjectName" #subjectName="ngModel">
+                  
+                  <mat-option *ngFor="let s of subjects" [value]="s" >{{s.subjectName}}</mat-option>
+                </mat-select> <!--s.subjectId-->
+              </mat-form-field>
+              <div>
+                <div class="text-danger" *ngIf="(subjectName.touched||quizform.submitted) && subjectName.errors?.['required']" ></div>
+              </div>
+            
+              <mat-form-field  appearance="fill" class="w100" >
+                <mat-label>Enter Passing Marks</mat-label>
+                <input required pattern="[0-9]+" type="text" name="passingMarks" #passingMarks="ngModel" placeholder="enter here" [(ngModel)]="quiz.passingMarks"  matInput/>
+            </mat-form-field>
+            <div>
+                <div class="mb10" style="color:red; margin-left: 20px;" *ngIf="passingMarks.touched && passingMarks.errors?.['pattern']">Only numbers are allowed</div>
+                <div class="text-danger" *ngIf="(passingMarks.touched||quizform.submitted) && passingMarks.errors?.['required']" ></div>
+            </div>
+            <!--active field-->
+            <mat-slide-toggle
+          class="mt20" checked=true name="isActive" [(ngModel)]="quiz.isActive">
+       Publish Status
+      </mat-slide-toggle>
+      <div class="container text-center ">
+        <button mat-raised-button color="primary">Add</button>
+      </div><br>
+              
+        </form>
+
+        
+    </div>
+</mat-card>
+<!--{{quiz.isActive | json}}-->

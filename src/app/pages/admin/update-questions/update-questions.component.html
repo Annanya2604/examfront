@@ -1,0 +1,76 @@
+
+<div class="bootstrap-wrapper">
+    <div class="row mt20">
+        <div class="col-md-12">
+            <h1 style="color:#683cb4">Updating Quiz Questions</h1>
+            <button mat-raised-button color="accent" (click)="viewques(qId)" >Back</button>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-subtitle>Enter the details of the new question</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <form (submit)="updateQuestion()" >
+                        <!--content field -->
+                        <mat-form-field appearance="fill" class="w100">
+                            <mat-label>Enter question description</mat-label>
+                            <textarea matInput [(ngModel)]="questions.quesName" name="content"></textarea>
+                          </mat-form-field>
+                          <mat-form-field appearance="fill" class="w100">
+                            <mat-label>Enter question Marks</mat-label>
+                            <input matInput [(ngModel)]="questions.quesMarks" name="question">
+                          </mat-form-field>
+                          <div class="row" >
+                            <div class="col-md-6">
+                                <mat-form-field class="w100">
+                                    <mat-label >Enter Option1</mat-label>
+                                    <input type="text" [(ngModel)]="questions.answer[0].optionName"  name="option1" matInput/>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field class="w100">
+                                    <mat-label>Enter Option2</mat-label>
+                                    <input type="text" [(ngModel)]="questions.answer[1].optionName" name="option2"  matInput/>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field class="w100">
+                                    <mat-label>Enter Option2</mat-label>
+                                    <input type="text" [(ngModel)]="questions.answer[2].optionName" name="option3" matInput/>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field class="w100">
+                                    <mat-label>Enter Option4</mat-label>
+                                    <input type="text" [(ngModel)]="questions.answer[3].optionName"  name="option4" matInput/>
+                                </mat-form-field>
+                            </div>
+                            <!--answer-->
+                            <mat-form-field>
+                                <mat-label>Select answer</mat-label>
+                                <mat-select  name="select" (selectionChange)="selectChangeHandler($event)" >
+                                    <mat-option *ngIf="questions.answer[0].optionName" [value]="1" >{{questions.answer[0].optionName}}</mat-option>
+                                    <mat-option *ngIf="questions.answer[1].optionName" [value]="2" >{{questions.answer[1].optionName}}</mat-option>
+                                    <mat-option *ngIf="questions.answer[2].optionName" [value]="3" >{{questions.answer[2].optionName}}</mat-option>
+                                    <mat-option *ngIf="questions.answer[3].optionName" [value]="4" >{{questions.answer[3].optionName}}</mat-option>
+                                </mat-select>
+                            </mat-form-field> 
+                            <!-- <mat-form-field>
+                                <mat-label>Select answer</mat-label>
+                                <mat-select  name="select"  (selectionChange)="selectChangeHandler($event)" [(ngModel)]="selectedOption">
+                                    <mat-option  *ngFor="let a of questions.answer" [value]="a.optionName">{{a.optionName}}</mat-option>
+                                    
+                                </mat-select>
+                            </mat-form-field>  -->
+                            
+                            <div class="container text-center" >
+                                <button mat-raised-button color="accent">Update</button>
+                            </div>
+                          </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>
+<!-- {{questions|json}} -->
+

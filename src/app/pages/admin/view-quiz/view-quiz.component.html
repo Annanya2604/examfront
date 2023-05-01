@@ -1,0 +1,79 @@
+
+<div class="container">
+    <div class="row">
+        <div class="search-hero">
+        <b>Search : </b>    <input type="text" name="search" [(ngModel)]="searchText" placeholder="search by standard">
+        </div>
+    </div>
+</div>
+<button routerLink="/admin/addquiz"  mat-raised-button color="primary">Add new Quiz</button>
+<table class="styled-table" >
+    <thead>
+        <tr>
+            <th>Quiz Name</th>
+            <th>Quiz Description</th>
+            <th>Is active</th>
+            <th>No of Questions</th>
+            <th>Passing Marks </th>
+            <th>Quiz Marks </th>
+            <th>Standard</th>
+            <th>Subject name </th>
+            <!-- <th>Created date </th>
+            <th>Updated date </th> -->
+            <th>Start time</th>
+            <th>End time</th>
+        </tr>
+    </thead>
+    <tbody >
+        <tr *ngFor="let q of quizzes | filter:searchText|paginate:{itemsPerPage: tableSize, currentPage:page, totalItems:count}; let i = index">
+            <td> {{q.quizName}}  </td>
+            <td>  {{q.description}}  </td>
+            <td>  {{q.isActive}}  </td>
+            <td>  {{q.noOfQues}}  </td>
+            <td>  {{q.passingMarks}}  </td>
+            <td>  {{q.quizMarks}}  </td>
+            <td>  {{q.subject.standard.standardName}} </td>
+            <td>  {{q.subject.subjectName}}  </td>
+            <!-- <td>  {{q.createdDate}}  </td>
+            <td>  {{q.updatedDate}}  </td> -->
+            <td>  {{q.startTime}}  </td>
+            <td>  {{q.endTime}}  </td>
+            <!-- <td><button mat-raised-button color="primary" (click)="update(q.quizId)"> Update</button></td> -->
+            <td><button mat-icon-button  color="primary" (click)="update(q.quizId)" aria-label="Example icon button with a vertical three dot icon">
+                <mat-icon>edit</mat-icon>
+              </button></td>
+              <td>
+                <button mat-icon-button  color="warn" (click)="deleteQuiz(q.quizId)" aria-label="Example icon button with a vertical three dot icon">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+              </td>
+              <td>
+                <button mat-icon-button  style="color:green;" (click)="viewques(q.quizId)" aria-label="Example icon button with a vertical three dot icon">
+                    <mat-icon>visibility</mat-icon>
+                  </button>
+                
+              </td>
+            <!-- <td><button  mat-raised-button color="warn" (click)="deleteQuiz(q.quizId)" >Delete</button></td> -->
+            <!-- <td><button  mat-raised-button color="accent" (click)="viewques(q.quizId)"  >ViewQuestions</button></td> -->
+            <!-- <td><button  mat-raised-button color="accent" (click)="viewques(q.quizId)"  >ViewQuestions</button></td> -->
+        </tr>
+        </tbody>
+        </table>
+        
+        <div style="margin-right:150px;text-align: right;">
+            <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)"></pagination-controls>
+        </div><br>
+        <div style="margin-right:150px;text-align: right;">
+            <label>Page size:</label>
+            <select  (change)="OnTableSizeChange($event)">
+                
+               <option *ngFor="let size of tableSizes">
+               
+                    {{size}}
+               </option>
+            </select>
+        </div>
+        
+          
+
+

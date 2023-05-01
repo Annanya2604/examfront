@@ -1,0 +1,38 @@
+
+
+<mat-card>
+    <h1 style="color:#683cb4;text-align: center;" > Update Subject</h1>
+    <!--{{standard|json}}-->
+    <mat-card-content>
+        <div class="bootstrap-wrapper">
+            <div class="row">
+                <div class="col md 6 offset md-3 text-center">
+                    <form (submit)="updatesubject()">
+                        <!-- <mat-form-field class="w100" appearance="outline">
+                            <mat-label>Std name</mat-label>
+                            <input required type="text" name="title" matInput  placeholder="enter here" >
+            
+                        </mat-form-field><br> -->
+                        <mat-form-field class="w100" appearance="fill" >
+                            <mat-label >Subject Name</mat-label>
+                            <input required type="text" name="title" matInput  placeholder="enter here" [(ngModel)]="subject.subjectName" >
+                            <!--subject.subjectName-->
+                        </mat-form-field><br>
+                        <mat-form-field appearance="fill" class="mt20 w100">
+                            <mat-label>Standard</mat-label>
+                            <mat-select [(ngModel)]="subject.standard.standardId" name="standardName">
+                              <mat-option>None</mat-option>
+                              <mat-option *ngFor="let s of standards" [value]="s.standardId" >{{s.standardName}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <div class="container text-center ">
+                            <button mat-raised-button color="primary">Update</button>
+                          </div><br>
+                          
+                    </form>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
+<!-- {{subject|json}} -->

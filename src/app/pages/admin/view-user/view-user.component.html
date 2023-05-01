@@ -1,0 +1,75 @@
+
+
+<div class="container">
+    <div class="row">
+        <div class="search-hero">
+        <b>Search : </b>    <input type="text" name="search" [(ngModel)]="searchText" placeholder="search here">
+        </div>
+    </div>
+</div>
+<button   mat-raised-button color="primary" routerLink="/admin/add-users">Add new Student</button>
+<table class="styled-table" >
+    <thead>
+        <tr>
+            <th>Full name</th>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Email</th>
+            <th>Standard</th>
+            <th>Section</th>
+            <!-- <th>Password</th> -->
+            <th>Update  </th>
+            <th> Delete </th>
+            <!-- <th>Add section</th>
+            <th>Update section</th> -->
+        </tr>
+    </thead>
+    <tbody >
+        <tr *ngFor="let u of users | filter:searchText|paginate:{itemsPerPage: tableSize, currentPage:page, totalItems:count}; let i = index">
+            <td> {{u.firstname}} {{u.lastname}}  </td>
+            <td>{{u.username}}</td>
+            <td>{{u.role.roleName}}</td>
+            <td>{{u.email}}</td>
+            <td>{{u.standard.standardName}}</td>
+            <td>{{u.section.sectionName}}</td>
+            <!-- <td >{{u.password}}</td> -->
+            
+           
+            <!-- <td><button  mat-raised-button color="primary" (click)="update(u.id)" >Update</button></td> -->
+            <td><button mat-icon-button  color="primary" (click)="update(u.id)" aria-label="Example icon button with a vertical three dot icon">
+                <mat-icon>edit</mat-icon>
+              </button></td>
+            <!-- <td><button  mat-raised-button color="warn" (click)="deleteuser(u.id)" >Delete</button></td> -->
+            <td><button mat-icon-button  color="warn" (click)="deleteuser(u.id)" aria-label="Example icon button with a vertical three dot icon">
+                <mat-icon>delete</mat-icon>
+              </button></td>
+            <!-- <td><button (click)="update(s.standardId)" mat-raised-button color="primary" > Update</button></td>
+            <td><button  mat-raised-button color="warn" (click)="deleteStandard(s.standardId)" >Delete</button></td> -->
+        </tr>
+        <!-- <tr class="active-row">
+            <td>Melissa</td>
+            <td>5150</td>
+        </tr> -->
+        <!-- <tr>
+            <td>Dom</td>
+            <td>6000</td>
+        </tr> -->
+        <!-- and so on... -->
+    </tbody>
+</table>
+<div style="margin-right:150px;text-align: right;">
+    <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)"></pagination-controls>
+</div><br>
+<div style="margin-right:150px;text-align: right;">
+    <label>Page size:</label>
+    <select  (change)="OnTableSizeChange($event)">
+        
+       <option *ngFor="let size of tableSizes">
+       
+            {{size}}
+       </option>
+    </select>
+</div>
+
+  
+
